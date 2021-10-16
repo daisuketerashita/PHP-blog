@@ -58,10 +58,11 @@ class QueryArticle extends Connect{
                   $filename = $this->article->getFilename();
                 }   
               }
-            $stmt = $this->dbh->prepare("INSERT INTO articles (title, body, created_at, updated_at)
-            VALUES (:title, :body, NOW(), NOW())");
+              $stmt = $this->dbh->prepare("INSERT INTO articles (title, body, filename, created_at, updated_at)
+              VALUES (:title, :body, :filename, NOW(), NOW())");
             $stmt->bindParam(':title', $title, PDO::PARAM_STR);
             $stmt->bindParam(':body', $body, PDO::PARAM_STR);
+            $stmt->bindParam(':filename', $filename, PDO::PARAM_STR);
             $stmt->execute();
         }
     }
